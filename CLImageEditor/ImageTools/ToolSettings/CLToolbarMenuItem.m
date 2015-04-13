@@ -10,23 +10,20 @@
 #import "CLImageEditorTheme+Private.h"
 #import "UIView+Frame.h"
 
-@implementation CLToolbarMenuItem
-{
-    
+@implementation CLToolbarMenuItem {
 }
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         CGFloat W = frame.size.width;
-        
-        _iconView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, W-20, W-20)];
+
+        _iconView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, W - 20, W - 20)];
         _iconView.clipsToBounds = YES;
-        _iconView.layer.cornerRadius = 5;
+        _iconView.layer.cornerRadius = 0;
         _iconView.contentMode = UIViewContentModeScaleAspectFill;
         [self addSubview:_iconView];
-        
+
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _iconView.bottom + 5, W, 15)];
         _titleLabel.backgroundColor = [UIColor clearColor];
         _titleLabel.textColor = [CLImageEditorTheme toolbarTextColor];
@@ -37,74 +34,62 @@
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame target:(id)target action:(SEL)action toolInfo:(CLImageToolInfo*)toolInfo
-{
+- (id)initWithFrame:(CGRect)frame target:(id)target action:(SEL)action toolInfo:(CLImageToolInfo *)toolInfo {
     self = [self initWithFrame:frame];
-    if(self){
+    if (self) {
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:target action:action];
         [self addGestureRecognizer:gesture];
-        
+
         self.toolInfo = toolInfo;
     }
     return self;
 }
 
-- (NSString*)title
-{
+- (NSString *)title {
     return _titleLabel.text;
 }
 
-- (void)setTitle:(NSString *)title
-{
+- (void)setTitle:(NSString *)title {
     _titleLabel.text = title;
 }
 
-- (UIImageView*)iconView
-{
+- (UIImageView *)iconView {
     return _iconView;
 }
 
-- (UIImage*)iconImage
-{
+- (UIImage *)iconImage {
     return _iconView.image;
 }
 
-- (void)setIconImage:(UIImage *)iconImage
-{
+- (void)setIconImage:(UIImage *)iconImage {
     _iconView.image = iconImage;
 }
 
-- (void)setUserInteractionEnabled:(BOOL)userInteractionEnabled
-{
+- (void)setUserInteractionEnabled:(BOOL)userInteractionEnabled {
     [super setUserInteractionEnabled:userInteractionEnabled];
     self.alpha = (userInteractionEnabled) ? 1 : 0.3;
 }
 
-- (void)setToolInfo:(CLImageToolInfo *)toolInfo
-{
+- (void)setToolInfo:(CLImageToolInfo *)toolInfo {
     [super setToolInfo:toolInfo];
-    
+
     self.title = self.toolInfo.title;
-    if(self.toolInfo.iconImagePath){
+    if (self.toolInfo.iconImagePath) {
         self.iconImage = self.toolInfo.iconImage;
-    }
-    else{
+    } else {
         self.iconImage = nil;
     }
 }
 
-- (void)setSelected:(BOOL)selected
-{
-    if(selected != _selected){
+- (void)setSelected:(BOOL)selected {
+    if (selected != _selected) {
         _selected = selected;
-        if(selected){
+        if (selected) {
             self.backgroundColor = [CLImageEditorTheme toolbarSelectedButtonColor];
-        }
-        else{
+        } else {
             self.backgroundColor = [UIColor clearColor];
         }
     }
 }
 
 @end
-
