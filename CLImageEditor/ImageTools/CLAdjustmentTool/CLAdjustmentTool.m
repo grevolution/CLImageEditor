@@ -91,6 +91,20 @@ static NSString *const kCLAdjustmentToolContrastIconName = @"contrastIconAssetsN
     slider.minimumValue = min;
     slider.value = value;
 
+    [slider setMaximumTrackImage:[[UIImage imageNamed:@"img_camera-slider-full"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)
+                                                                                                resizingMode:UIImageResizingModeTile]
+                        forState:UIControlStateNormal];
+    [slider setMaximumTrackImage:[[UIImage imageNamed:@"img_camera-slider-full"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)
+                                                                                                resizingMode:UIImageResizingModeTile]
+                        forState:UIControlStateHighlighted];
+
+    [slider setMinimumTrackImage:[[UIImage imageNamed:@"img_camera-slider-full"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)
+                                                                                                resizingMode:UIImageResizingModeTile]
+                        forState:UIControlStateNormal];
+    [slider setMinimumTrackImage:[[UIImage imageNamed:@"img_camera-slider-full"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)
+                                                                                                resizingMode:UIImageResizingModeTile]
+                        forState:UIControlStateHighlighted];
+
     [container addSubview:slider];
     [self.editor.view addSubview:container];
 
