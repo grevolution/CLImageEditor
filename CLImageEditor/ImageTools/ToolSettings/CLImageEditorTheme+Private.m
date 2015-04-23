@@ -53,6 +53,11 @@
     return self.theme.toolbarTextColor;
 }
 
++ (UIColor *)toolbarSelectedTextColor {
+    return self.theme.toolbarSelectedTextColor;
+}
+
+
 + (UIColor *)toolbarSelectedButtonColor {
     return self.theme.toolbarSelectedButtonColor;
 }

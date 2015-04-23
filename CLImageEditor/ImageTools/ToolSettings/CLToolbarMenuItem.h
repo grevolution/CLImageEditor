@@ -15,6 +15,7 @@
 
 @property (nonatomic, assign) NSString *title;
 @property (nonatomic, assign) UIImage *iconImage;
+@property (nonatomic, assign) UIImage *iconImageSelected;
 @property (nonatomic, assign) BOOL selected;
 @property (nonatomic, readonly) UIImageView *iconView;
 @property (nonatomic, strong) UILabel *titleLabel;

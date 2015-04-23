@@ -20,6 +20,7 @@
 + (UIColor *)backgroundColor;
 + (UIColor *)toolbarColor;
 + (UIColor *)toolbarTextColor;
++ (UIColor *)toolbarSelectedTextColor;
 + (UIColor *)toolbarSelectedButtonColor;
 
 + (UIFont *)toolbarTextFont;

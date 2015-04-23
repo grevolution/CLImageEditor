@@ -43,6 +43,7 @@ static CLImageEditorTheme *_sharedInstance = nil;
         self.toolbarColor = [UIColor grayColor];
         self.toolIconColor = @"bountye";
         self.toolbarTextColor = [UIColor whiteColor];
+        self.toolbarSelectedTextColor = [UIColor orangeColor];
         self.toolbarSelectedButtonColor = [UIColor clearColor];
         self.toolbarTextFont = [UIFont systemFontOfSize:10];
         self.mainToolbarTextFont = [UIFont systemFontOfSize:13];

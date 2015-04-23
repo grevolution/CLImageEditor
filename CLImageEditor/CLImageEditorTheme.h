@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UIColor *toolbarColor;
 @property (nonatomic, strong) NSString *toolIconColor;
 @property (nonatomic, strong) UIColor *toolbarTextColor;
+@property (nonatomic, strong) UIColor *toolbarSelectedTextColor;
 @property (nonatomic, strong) UIColor *toolbarSelectedButtonColor;
 @property (nonatomic, strong) UIFont *mainToolbarTextFont;
 @property (nonatomic, strong) UIFont *toolbarTextFont;

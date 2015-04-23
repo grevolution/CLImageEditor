@@ -19,6 +19,7 @@ static NSString *const kCLAdjustmentToolContrastIconName = @"contrastIconAssetsN
     UISlider *_brightnessSlider;
     UISlider *_contrastSlider;
     UIActivityIndicatorView *_indicatorView;
+    UIView *_viewSliderContainer;
 }
 
 + (NSString *)defaultTitle {
@@ -34,7 +35,7 @@ static NSString *const kCLAdjustmentToolContrastIconName = @"contrastIconAssetsN
     _thumbnailImage = [_originalImage resize:self.editor.imageView.frame.size];
 
     [self.editor fixZoomScaleWithAnimated:YES];
-
+    
     [self setupSlider];
 }
 
@@ -43,7 +44,8 @@ static NSString *const kCLAdjustmentToolContrastIconName = @"contrastIconAssetsN
     [_saturationSlider.superview removeFromSuperview];
     [_brightnessSlider.superview removeFromSuperview];
     [_contrastSlider.superview removeFromSuperview];
-
+    [_viewSliderContainer removeFromSuperview];
+    
     [self.editor resetZoomScaleWithAnimated:YES];
 }
 
@@ -81,7 +83,7 @@ static NSString *const kCLAdjustmentToolContrastIconName = @"contrastIconAssetsN
     UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(10, 0, screenWidth - 80, 20)];
 
     UIView *container = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth - 60, slider.height)];
-    container.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+    container.backgroundColor = [UIColor clearColor];
     container.layer.cornerRadius = slider.height / 2;
 
     slider.continuous = YES;
@@ -106,7 +108,7 @@ static NSString *const kCLAdjustmentToolContrastIconName = @"contrastIconAssetsN
                         forState:UIControlStateHighlighted];
 
     [container addSubview:slider];
-    [self.editor.view addSubview:container];
+    [_viewSliderContainer addSubview:container];
 
     return slider;
 }
@@ -118,6 +120,11 @@ static NSString *const kCLAdjustmentToolContrastIconName = @"contrastIconAssetsN
 }
 
 - (void)setupSlider {
+    _viewSliderContainer = [[UIView alloc] initWithFrame:CGRectMake(0, self.editor.view.bottom - 100, self.editor.view.width, 100)];
+    _viewSliderContainer.backgroundColor = [CLImageEditorTheme toolbarColor];
+    [self.editor.view addSubview:_viewSliderContainer];
+
+    
     _saturationSlider = [self sliderWithValue:1 minimumValue:0 maximumValue:2 action:@selector(sliderDidChange:)];
     _saturationSlider.superview.center = CGPointMake(self.editor.view.width / 2, self.editor.menuView.top - 30);
     [self setIconForSlider:_saturationSlider
@@ -126,13 +133,13 @@ static NSString *const kCLAdjustmentToolContrastIconName = @"contrastIconAssetsN
     _saturationSlider.superview.hidden = YES;
 
     _brightnessSlider = [self sliderWithValue:0 minimumValue:-1 maximumValue:1 action:@selector(sliderDidChange:)];
-    _brightnessSlider.superview.center = CGPointMake(self.editor.view.width / 2, self.editor.menuView.top + 10);
+    _brightnessSlider.superview.center = CGPointMake(self.editor.view.width / 2, 25);
     [self setIconForSlider:_brightnessSlider
                    withKey:kCLAdjustmentToolBrightnessIconName
            defaultIconName:@"brightness.png"];
 
     _contrastSlider = [self sliderWithValue:1 minimumValue:0.5 maximumValue:1.5 action:@selector(sliderDidChange:)];
-    _contrastSlider.superview.center = CGPointMake(_brightnessSlider.superview.center.x, _brightnessSlider.superview.center.y + 40);
+    _contrastSlider.superview.center = CGPointMake(_brightnessSlider.superview.center.x, _brightnessSlider.superview.center.y + 50);
     [self setIconForSlider:_contrastSlider withKey:kCLAdjustmentToolContrastIconName defaultIconName:@"contrast.png"];
 }
 

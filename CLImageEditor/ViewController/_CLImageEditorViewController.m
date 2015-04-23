@@ -416,8 +416,8 @@
 
 - (void)fixZoomScaleWithAnimated:(BOOL)animated {
     CGFloat minZoomScale = _scrollView.minimumZoomScale;
-    _scrollView.maximumZoomScale = 0.95 * minZoomScale;
-    _scrollView.minimumZoomScale = 0.95 * minZoomScale;
+    _scrollView.maximumZoomScale = 0.80 * minZoomScale;
+    _scrollView.minimumZoomScale = 0.80 * minZoomScale;
     [_scrollView setZoomScale:_scrollView.minimumZoomScale animated:animated];
 }
 

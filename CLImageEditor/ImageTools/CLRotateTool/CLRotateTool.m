@@ -21,6 +21,7 @@ static NSString *const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAss
 @implementation CLRotateTool {
     UISlider *_rotateSlider;
     UIScrollView *_menuScroll;
+    UIView *_viewSliderBackground;
     CGRect _initialRect;
 
     BOOL _executed;
@@ -69,8 +70,14 @@ static NSString *const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAss
     _gridView.gridColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.8];
     _gridView.clipsToBounds = NO;
 
+    _viewSliderBackground = [[UIView alloc] initWithFrame:self.editor.menuView.frame];
+    _viewSliderBackground.backgroundColor = [CLImageEditorTheme toolbarColor];
+    [self.editor.view addSubview:_viewSliderBackground];
+
     _rotateSlider = [self sliderWithValue:0 minimumValue:-1 maximumValue:1];
-    _rotateSlider.superview.center = CGPointMake(self.editor.menuView.center.x - 30, self.editor.menuView.center.y - 10);
+    _rotateSlider.superview.center = CGPointMake(self.editor.menuView.center.x - 30, self.editor.menuView.center.y);
+    [_rotateSlider setThumbImage:[UIImage imageNamed:@"icon_camera-rotateslider"] forState:UIControlStateNormal];
+    [_rotateSlider setThumbImage:[UIImage imageNamed:@"icon_camera-rotateslider"] forState:UIControlStateHighlighted];
 
     _menuScroll = [[UIScrollView alloc] initWithFrame:self.editor.menuView.frame];
     _menuScroll.backgroundColor = self.editor.menuView.backgroundColor;
@@ -79,6 +86,8 @@ static NSString *const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAss
     _menuScroll.left = self.editor.view.width - _menuScroll.width;
     _menuScroll.scrollEnabled = NO;
     [self.editor.view addSubview:_menuScroll];
+    
+    
     [self setMenu];
 
     _menuScroll.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height - _menuScroll.top);
@@ -94,7 +103,9 @@ static NSString *const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAss
         }];
 }
 
+
 - (void)cleanup {
+    [_viewSliderBackground removeFromSuperview];
     [_rotateSlider.superview removeFromSuperview];
     [_gridView removeFromSuperview];
 
@@ -143,7 +154,7 @@ static NSString *const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAss
 #pragma mark -
 
 - (void)setMenu {
-    CGFloat W = 70;
+    CGFloat W = 60;
     CGFloat H = _menuScroll.height;
     CGFloat x = 0;
 
@@ -165,7 +176,7 @@ static NSString *const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAss
     NSArray *_menu = @[
         @{
             @"title" : [CLImageEditorTheme localizedString:@"CLRotateTool_MenuItemRotateTitle" withDefault:@" "],
-            @"icon" : [self imageForKey:kCLRotateToolRotateIconName defaultImageName:@"btn_rotate.png"]
+            @"icon" : [self imageForKey:kCLRotateToolRotateIconName defaultImageName:@"icon_camera-rotate90.png"]
         },
         //                       @{@"title":[CLImageEditorTheme localizedString:@"CLRotateTool_MenuItemFlipTitle1"
         //                       withDefault:@" "], @"icon":[self imageForKey:kCLRotateToolFlipHorizontalIconName
@@ -181,6 +192,7 @@ static NSString *const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAss
                                                                  target:self
                                                                  action:@selector(tappedMenu:)
                                                                toolInfo:nil];
+        view.iconView.top += 10;
         view.tag = tag++;
         view.iconImage = obj[@"icon"];
         view.title = obj[@"title"];
@@ -234,7 +246,7 @@ static NSString *const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAss
     UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(10, 0, screenWidth - 120, 20)];
 
     UIView *container = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth - 100, slider.height)];
-    container.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+    container.backgroundColor = [UIColor clearColor];
     container.layer.cornerRadius = slider.height / 2;
 
     slider.continuous = YES;
@@ -244,6 +256,21 @@ static NSString *const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAss
     slider.minimumValue = min;
     slider.value = value;
 
+    [slider setMaximumTrackImage:[[UIImage imageNamed:@"img_camera-slider-full"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)
+                                                                                                resizingMode:UIImageResizingModeTile]
+                        forState:UIControlStateNormal];
+    [slider setMaximumTrackImage:[[UIImage imageNamed:@"img_camera-slider-full"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)
+                                                                                                resizingMode:UIImageResizingModeTile]
+                        forState:UIControlStateHighlighted];
+    
+    [slider setMinimumTrackImage:[[UIImage imageNamed:@"img_camera-slider-full"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)
+                                                                                                resizingMode:UIImageResizingModeTile]
+                        forState:UIControlStateNormal];
+    [slider setMinimumTrackImage:[[UIImage imageNamed:@"img_camera-slider-full"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)
+                                                                                                resizingMode:UIImageResizingModeTile]
+                        forState:UIControlStateHighlighted];
+
+    
     [container addSubview:slider];
     [self.editor.view addSubview:container];
 
