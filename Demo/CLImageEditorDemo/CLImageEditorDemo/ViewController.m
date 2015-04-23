@@ -19,14 +19,15 @@
     [super viewDidLoad];
 
     // Set a black theme rather than a white one
-    /*
-[[CLImageEditorTheme theme] setBackgroundColor:[UIColor blackColor]];
-    [[CLImageEditorTheme theme] setToolbarColor:[[UIColor blackColor] colorWithAlphaComponent:0.8]];
+    [[CLImageEditorTheme theme] setBackgroundColor:[UIColor blackColor]];
+    [[CLImageEditorTheme theme] setToolbarColor:[UIColor blueColor]];
+    [[CLImageEditorTheme theme] setToolIconColor:@"bountye"];
     [[CLImageEditorTheme theme] setToolbarTextColor:[UIColor whiteColor]];
-    [[CLImageEditorTheme theme] setToolIconColor:@"white"];
-[[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
-[[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-*/
+    [[CLImageEditorTheme theme] setToolbarSelectedTextColor:[UIColor orangeColor]];
+    [[CLImageEditorTheme theme] setToolbarSelectedButtonColor:[UIColor clearColor]];
+    [[CLImageEditorTheme theme] setToolbarTextFont:[UIFont systemFontOfSize:10]];
+    [[CLImageEditorTheme theme] setMainToolbarTextFont:[UIFont systemFontOfSize:13]];
+
     [self refreshImageView];
 }
 

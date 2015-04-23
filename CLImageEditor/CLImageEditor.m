@@ -13,38 +13,29 @@
 
 @end
 
-
 @implementation CLImageEditor
 
-- (id)init
-{
+- (id)init {
     return [_CLImageEditorViewController new];
 }
 
-- (id)initWithImage:(UIImage*)image
-{
+- (id)initWithImage:(UIImage *)image {
     return [self initWithImage:image delegate:nil];
 }
 
-- (id)initWithImage:(UIImage*)image delegate:(id<CLImageEditorDelegate>)delegate
-{
+- (id)initWithImage:(UIImage *)image delegate:(id<CLImageEditorDelegate>)delegate {
     return [[_CLImageEditorViewController alloc] initWithImage:image delegate:delegate];
 }
 
-- (id)initWithDelegate:(id<CLImageEditorDelegate>)delegate
-{
+- (id)initWithDelegate:(id<CLImageEditorDelegate>)delegate {
     return [[_CLImageEditorViewController alloc] initWithDelegate:delegate];
 }
 
-- (void)showInViewController:(UIViewController*)controller withImageView:(UIImageView*)imageView;
-{
-    
-}
+- (void)showInViewController:(UIViewController *)controller withImageView:(UIImageView *)imageView;
+{}
 
-- (CLImageEditorTheme*)theme
-{
+- (CLImageEditorTheme *)theme {
     return [CLImageEditorTheme theme];
 }
 
 @end
-
