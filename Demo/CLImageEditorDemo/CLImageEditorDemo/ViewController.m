@@ -63,7 +63,6 @@
         NSArray *arr = @[
             @"CLEffectTool",
             @"CLBlurTool",
-            @"CLRotateTool",
             @"CLDrawTool",
             @"CLSplashTool",
             @"CLResizeTool",

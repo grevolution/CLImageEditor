@@ -9,83 +9,69 @@
 
 @implementation CLImageToolBase
 
-- (id)initWithImageEditor:(_CLImageEditorViewController*)editor withToolInfo:(CLImageToolInfo*)info
-{
+- (id)initWithImageEditor:(_CLImageEditorViewController *)editor withToolInfo:(CLImageToolInfo *)info {
     self = [super init];
-    if(self){
-        self.editor   = editor;
+    if (self) {
+        self.editor = editor;
         self.toolInfo = info;
     }
     return self;
 }
 
-+ (NSString*)defaultIconImagePath
-{
++ (NSString *)defaultIconImagePath {
     CLImageEditorTheme *theme = [CLImageEditorTheme theme];
     return [NSString stringWithFormat:@"%@.bundle/%@/%@/icon.png", [CLImageEditorTheme bundleName], NSStringFromClass([self class]), theme.toolIconColor];
 }
 
-+ (CGFloat)defaultDockedNumber
-{
++ (CGFloat)defaultDockedNumber {
     // Image tools are sorted according to the dockedNumber in tool bar.
     // Override point for tool bar customization
     NSArray *tools = @[
-                       @"CLFilterTool",
-                       @"CLAdjustmentTool",
-                       @"CLEffectTool",
-                       @"CLBlurTool",
-                       @"CLRotateTool",
-                       @"CLClippingTool",
-                       @"CLToneCurveTool",
-                       ];
+        @"CLFilterTool",
+        @"CLAdjustmentTool",
+        @"CLEffectTool",
+        @"CLBlurTool",
+        @"CLRotateTool",
+        @"CLClippingTool",
+        @"CLToneCurveTool",
+    ];
     return [tools indexOfObject:NSStringFromClass(self)];
 }
 
-+ (NSArray*)subtools
-{
++ (NSArray *)subtools {
     return nil;
 }
 
-+ (NSString*)defaultTitle
-{
++ (NSString *)defaultTitle {
     return @"DefaultTitle";
 }
 
-+ (BOOL)isAvailable
-{
++ (BOOL)isAvailable {
     return NO;
 }
 
-+ (NSDictionary*)optionalInfo
-{
++ (NSDictionary *)optionalInfo {
     return nil;
 }
 
-#pragma mark-
+#pragma mark -
 
-- (void)setup
-{
-    
+- (void)setup {
 }
 
-- (void)cleanup
-{
-    
+- (void)cleanup {
 }
 
-- (void)executeWithCompletionBlock:(void(^)(UIImage *image, NSError *error, NSDictionary *userInfo))completionBlock
-{
+- (void)executeWithCompletionBlock:(void (^)(UIImage *image, NSError *error, NSDictionary *userInfo))completionBlock {
     completionBlock(self.editor.imageView.image, nil, nil);
 }
 
-- (UIImage*)imageForKey:(NSString*)key defaultImageName:(NSString*)defaultImageName
-{
+- (UIImage *)imageForKey:(NSString *)key defaultImageName:(NSString *)defaultImageName {
     NSString *iconName = self.toolInfo.optionalInfo[key];
-    
-    if(iconName.length>0){
+
+    if (iconName.length > 0) {
         return [UIImage imageNamed:iconName];
-    }
-    else{
+    } else {
         return [CLImageEditorTheme imageNamed:[self class] image:defaultImageName];
     }
 }

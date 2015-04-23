@@ -119,7 +119,7 @@
 
 - (void)initMenuScrollView {
     if (self.menuView == nil) {
-        UIScrollView *menuScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 80)];
+        UIScrollView *menuScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 75)];
         menuScroll.top = self.view.height - menuScroll.height;
         menuScroll.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
         menuScroll.showsHorizontalScrollIndicator = NO;
@@ -380,12 +380,12 @@
 #pragma mark -
 
 - (void)setMenuView {
-    CGFloat W = 70;
     CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
+    CGFloat W = screenWidth / 4;
     CGFloat x = 0;
-    if (self.toolInfo.sortedSubtools.count * W > screenWidth) {
-        x = ([[UIScreen mainScreen] bounds].size.width / 2) - 105;
-    }
+    //    if (self.toolInfo.sortedSubtools.count * W > screenWidth) {
+    //        x = ([[UIScreen mainScreen] bounds].size.width / 2) - 140;
+    //    }
     CGFloat H = _menuView.height;
 
     for (CLImageToolInfo *info in self.toolInfo.sortedSubtools) {
@@ -393,10 +393,10 @@
             continue;
         }
 
-        CLToolbarMenuItem *view = [CLImageEditorTheme menuItemWithFrame:CGRectMake(x, 0, W, H)
-                                                                 target:self
-                                                                 action:@selector(tappedMenuView:)
-                                                               toolInfo:info];
+        CLToolbarMenuItem *view = [CLImageEditorTheme mainMenuItemWithFrame:CGRectMake(x, 10, W, H)
+                                                                     target:self
+                                                                     action:@selector(tappedMenuView:)
+                                                                   toolInfo:info];
         [_menuView addSubview:view];
         x += W;
     }

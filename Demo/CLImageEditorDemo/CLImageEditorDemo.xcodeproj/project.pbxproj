@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0BB940151AE8D7AB00E34FE3 /* CLMainToolbarMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB940141AE8D7AB00E34FE3 /* CLMainToolbarMenuItem.m */; };
 		AD1D2C6B1897538900752339 /* CLGPUImageVignetteFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = AD1D2C6A1897538900752339 /* CLGPUImageVignetteFilter.m */; };
 		AD29BB5D18EA471A0084D3D6 /* CLEmoticonTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AD29BB5C18EA471A0084D3D6 /* CLEmoticonTool.m */; };
 		AD359C321954FB4D00B763CF /* CLSplashTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AD359C311954FB4D00B763CF /* CLSplashTool.m */; };
@@ -67,6 +68,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0BB940131AE8D7AB00E34FE3 /* CLMainToolbarMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLMainToolbarMenuItem.h; sourceTree = "<group>"; };
+		0BB940141AE8D7AB00E34FE3 /* CLMainToolbarMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLMainToolbarMenuItem.m; sourceTree = "<group>"; };
 		AD13E67C1850F7C8009B12AD /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AD1D2C691897538900752339 /* CLGPUImageVignetteFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLGPUImageVignetteFilter.h; path = CLGPUImageFilters/CLGPUImageVignetteFilter.h; sourceTree = "<group>"; };
 		AD1D2C6A1897538900752339 /* CLGPUImageVignetteFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLGPUImageVignetteFilter.m; path = CLGPUImageFilters/CLGPUImageVignetteFilter.m; sourceTree = "<group>"; };
@@ -362,6 +365,8 @@
 				AD5A03181897528000347C57 /* CLImageToolSettings.h */,
 				AD5A03191897528000347C57 /* CLToolbarMenuItem.h */,
 				AD5A031A1897528000347C57 /* CLToolbarMenuItem.m */,
+				0BB940131AE8D7AB00E34FE3 /* CLMainToolbarMenuItem.h */,
+				0BB940141AE8D7AB00E34FE3 /* CLMainToolbarMenuItem.m */,
 				AD5A031B1897528000347C57 /* UIView+CLImageToolInfo.h */,
 				AD5A031C1897528000347C57 /* UIView+CLImageToolInfo.m */,
 			);
@@ -593,6 +598,7 @@
 				AD5A03441897528000347C57 /* CLAdjustmentTool.m in Sources */,
 				AD5A03601897528000347C57 /* _CLImageEditorViewController.m in Sources */,
 				AD5C1E1418350DC400790989 /* AppDelegate.m in Sources */,
+				0BB940151AE8D7AB00E34FE3 /* CLMainToolbarMenuItem.m in Sources */,
 				AD5A034E1897528000347C57 /* CLEffectBase.m in Sources */,
 				AD5A034F1897528000347C57 /* CLEffectTool.m in Sources */,
 				AD5A03521897528000347C57 /* CLImageToolBase.m in Sources */,
