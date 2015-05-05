@@ -74,7 +74,7 @@ static NSString *const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAss
     _viewSliderBackground.backgroundColor = [CLImageEditorTheme toolbarColor];
     [self.editor.view addSubview:_viewSliderBackground];
 
-    _rotateSlider = [self sliderWithValue:0 minimumValue:-1 maximumValue:1];
+    _rotateSlider = [self sliderWithValue:0 minimumValue:-2 maximumValue:2];
     _rotateSlider.superview.center = CGPointMake(self.editor.menuView.center.x - 30, self.editor.menuView.center.y);
     [_rotateSlider setThumbImage:[UIImage imageNamed:@"icon_camera-rotateslider"] forState:UIControlStateNormal];
     [_rotateSlider setThumbImage:[UIImage imageNamed:@"icon_camera-rotateslider"] forState:UIControlStateHighlighted];
@@ -86,8 +86,7 @@ static NSString *const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAss
     _menuScroll.left = self.editor.view.width - _menuScroll.width;
     _menuScroll.scrollEnabled = NO;
     [self.editor.view addSubview:_menuScroll];
-    
-    
+
     [self setMenu];
 
     _menuScroll.transform = CGAffineTransformMakeTranslation(0, self.editor.view.height - _menuScroll.top);
@@ -102,7 +101,6 @@ static NSString *const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAss
           self.editor.imageView.hidden = YES;
         }];
 }
-
 
 - (void)cleanup {
     [_viewSliderBackground removeFromSuperview];
@@ -212,13 +210,19 @@ static NSString *const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAss
 
     switch (sender.view.tag) {
         case 0: {
-            CGFloat value = (int)floorf((_rotateSlider.value + 1) * 2) + 1;
-
-            if (value > 4) {
-                value -= 4;
+            //            CGFloat value = (int)floorf((_rotateSlider.value + 1) * 2) + 1;
+            //
+            //            if (value > 4) {
+            //                value -= 4;
+            //            }
+            //            _rotateSlider.value = value / 2 - 1;
+            //
+            //            _gridView.hidden = YES;
+            if (_rotateSlider.value == 2) {
+                _rotateSlider.value = -1;
+            } else {
+                _rotateSlider.value += 1;
             }
-            _rotateSlider.value = value / 2 - 1;
-
             _gridView.hidden = YES;
             break;
         }
@@ -262,7 +266,7 @@ static NSString *const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAss
     [slider setMaximumTrackImage:[[UIImage imageNamed:@"img_camera-slider-full"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)
                                                                                                 resizingMode:UIImageResizingModeTile]
                         forState:UIControlStateHighlighted];
-    
+
     [slider setMinimumTrackImage:[[UIImage imageNamed:@"img_camera-slider-full"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)
                                                                                                 resizingMode:UIImageResizingModeTile]
                         forState:UIControlStateNormal];
@@ -270,7 +274,6 @@ static NSString *const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAss
                                                                                                 resizingMode:UIImageResizingModeTile]
                         forState:UIControlStateHighlighted];
 
-    
     [container addSubview:slider];
     [self.editor.view addSubview:container];
 
@@ -278,19 +281,26 @@ static NSString *const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAss
 }
 
 - (void)sliderDidChange:(UISlider *)slider {
-    [self rotateStateDidChange];
+    slider.value = round(slider.value);
+    [UIView animateWithDuration:kCLImageToolAnimationDuration
+        animations:^{
+          [self rotateStateDidChange];
+        }
+        completion:^(BOOL finished) {
+          _gridView.hidden = NO;
+        }];
 }
 
 - (CATransform3D)rotateTransform:(CATransform3D)initialTransform clockwise:(BOOL)clockwise {
-    CGFloat arg = _rotateSlider.value * M_PI;
+    CGFloat arg = _rotateSlider.value * M_PI_2;
     if (!clockwise) {
         arg *= -1;
     }
 
     CATransform3D transform = initialTransform;
     transform = CATransform3DRotate(transform, arg, 0, 0, 1);
-    transform = CATransform3DRotate(transform, _flipState1 * M_PI, 0, 1, 0);
-    transform = CATransform3DRotate(transform, _flipState2 * M_PI, 1, 0, 0);
+    transform = CATransform3DRotate(transform, _flipState1 * M_PI_2, 0, 1, 0);
+    transform = CATransform3DRotate(transform, _flipState2 * M_PI_2, 1, 0, 0);
 
     return transform;
 }
@@ -298,7 +308,7 @@ static NSString *const kCLRotateToolFlipVerticalIconName = @"flipVerticalIconAss
 - (void)rotateStateDidChange {
     CATransform3D transform = [self rotateTransform:CATransform3DIdentity clockwise:YES];
 
-    CGFloat arg = _rotateSlider.value * M_PI;
+    CGFloat arg = _rotateSlider.value * M_PI_2;
     CGFloat Wnew = fabs(_initialRect.size.width * cos(arg)) + fabs(_initialRect.size.height * sin(arg));
     CGFloat Hnew = fabs(_initialRect.size.width * sin(arg)) + fabs(_initialRect.size.height * cos(arg));
 

@@ -87,8 +87,8 @@ static NSString *const kCLClippingToolImageNameSelected = @"toolImageNameNormalS
             kCLClippingToolImageNameSelected : @"icon_camera-crop3to4-selected"
         },
         @{
-            kCLClippingToolRatioValue1 : @2,
-            kCLClippingToolRatioValue2 : @3,
+            kCLClippingToolRatioValue1 : @3,
+            kCLClippingToolRatioValue2 : @2,
             kCLClippingToolRatioTitleFormat : @"%g : %g",
             kCLClippingToolImageName : @"icon_camera-crop2to3",
             kCLClippingToolImageNameSelected : @"icon_camera-crop2to3-selected"
