@@ -78,34 +78,34 @@ static NSString *const kCLClippingToolImageNameSelected = @"toolImageNameNormalS
             kCLClippingToolRatioTitleFormat : @"%g : %g",
             kCLClippingToolImageName : @"icon_camera-crop1to1",
             kCLClippingToolImageNameSelected : @"icon_camera-crop1to1-selected"
-            },
-        @{
-            kCLClippingToolRatioValue1 : @3,
-            kCLClippingToolRatioValue2 : @4,
-            kCLClippingToolRatioTitleFormat : @"%g : %g",
-            kCLClippingToolImageName : @"icon_camera-crop3to4",
-                        kCLClippingToolImageNameSelected : @"icon_camera-crop3to4-selected"
-            },
-        @{
-            kCLClippingToolRatioValue1 : @2,
-            kCLClippingToolRatioValue2 : @3,
-            kCLClippingToolRatioTitleFormat : @"%g : %g",
-                        kCLClippingToolImageName : @"icon_camera-crop2to3",
-                        kCLClippingToolImageNameSelected : @"icon_camera-crop2to3-selected"
         },
         @{
             kCLClippingToolRatioValue1 : @4,
             kCLClippingToolRatioValue2 : @3,
             kCLClippingToolRatioTitleFormat : @"%g : %g",
-                        kCLClippingToolImageName : @"icon_camera-crop4to3",
-                        kCLClippingToolImageNameSelected : @"icon_camera-crop4to3-selected"
+            kCLClippingToolImageName : @"icon_camera-crop3to4",
+            kCLClippingToolImageNameSelected : @"icon_camera-crop3to4-selected"
+        },
+        @{
+            kCLClippingToolRatioValue1 : @2,
+            kCLClippingToolRatioValue2 : @3,
+            kCLClippingToolRatioTitleFormat : @"%g : %g",
+            kCLClippingToolImageName : @"icon_camera-crop2to3",
+            kCLClippingToolImageNameSelected : @"icon_camera-crop2to3-selected"
         },
         @{
             kCLClippingToolRatioValue1 : @3,
-            kCLClippingToolRatioValue2 : @2,
+            kCLClippingToolRatioValue2 : @4,
             kCLClippingToolRatioTitleFormat : @"%g : %g",
-                        kCLClippingToolImageName : @"icon_camera-crop3to2",
-                        kCLClippingToolImageNameSelected : @"icon_camera-crop3to2-selected"
+            kCLClippingToolImageName : @"icon_camera-crop4to3",
+            kCLClippingToolImageNameSelected : @"icon_camera-crop4to3-selected"
+        },
+        @{
+            kCLClippingToolRatioValue1 : @2,
+            kCLClippingToolRatioValue2 : @3,
+            kCLClippingToolRatioTitleFormat : @"%g : %g",
+            kCLClippingToolImageName : @"icon_camera-crop3to2",
+            kCLClippingToolImageNameSelected : @"icon_camera-crop3to2-selected"
         },
     ];
 }
@@ -211,7 +211,8 @@ static NSString *const kCLClippingToolImageNameSelected = @"toolImageNameNormalS
 
     CGSize imgSize = self.editor.imageView.image.size;
     CGFloat maxW = MIN(imgSize.width, imgSize.height);
-    //UIImage *iconImage = [self.editor.imageView.image resize:CGSizeMake(W * imgSize.width / maxW, W * imgSize.height / maxW)];
+    // UIImage *iconImage = [self.editor.imageView.image resize:CGSizeMake(W * imgSize.width / maxW, W * imgSize.height
+    // / maxW)];
 
     for (NSDictionary *info in ratios) {
         CGFloat val1 = [info[kCLClippingToolRatioValue1] floatValue];
@@ -231,8 +232,9 @@ static NSString *const kCLClippingToolImageNameSelected = @"toolImageNameNormalS
                                                                 action:@selector(tappedMenu:)
                                                               toolInfo:nil];
         view.iconImage = [CLImageEditorTheme imageNamed:[self class] image:info[kCLClippingToolImageName]];
-        view.iconImageSelected = [CLImageEditorTheme imageNamed:[self class] image:info[kCLClippingToolImageNameSelected]];
-        
+        view.iconImageSelected =
+            [CLImageEditorTheme imageNamed:[self class] image:info[kCLClippingToolImageNameSelected]];
+
         view.ratio = ratio;
 
         if (ratios.count > 1 || !swapBtnHidden) {
@@ -249,7 +251,7 @@ static NSString *const kCLClippingToolImageNameSelected = @"toolImageNameNormalS
 
 - (void)tappedMenu:(UITapGestureRecognizer *)sender {
     CLRatioMenuItem *view = (CLRatioMenuItem *)sender.view;
-    
+
     view.alpha = 0.2;
     [UIView animateWithDuration:kCLImageToolAnimationDuration
                      animations:^{
@@ -751,12 +753,11 @@ static NSString *const kCLClippingToolImageNameSelected = @"toolImageNameNormalS
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
+
     CGFloat W = self.frame.size.width;
     self.iconView.contentMode = UIViewContentModeScaleAspectFit;
     self.iconView.frame = CGRectMake((W / 2) - 17, 5, 35, 30);
     self.titleLabel.frame = CGRectMake(0, self.iconView.bottom + 9, W, 15);
 }
-
 
 @end
