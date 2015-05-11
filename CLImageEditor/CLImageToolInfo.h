@@ -21,6 +21,8 @@
 - (NSString *)toolTreeDescription;
 - (NSArray *)sortedSubtools;
 
+- (int)availalbeSubtoolCount;
+
 - (CLImageToolInfo *)subToolInfoWithToolName:(NSString *)toolName recursive:(BOOL)recursive;
 
 @end

@@ -70,7 +70,7 @@
             @"CLToneCurveTool",
             @"CLStickerTool",
             @"CLEmoticonTool",
-            @"CLTextTool"
+            @"CLTextTool",
         ];
 
         for (NSString *a in arr) {

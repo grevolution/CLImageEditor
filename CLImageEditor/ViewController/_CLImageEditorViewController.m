@@ -383,9 +383,9 @@
     CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
     CGFloat W = screenWidth / 4;
     CGFloat x = 0;
-    //    if (self.toolInfo.sortedSubtools.count * W > screenWidth) {
-    //        x = ([[UIScreen mainScreen] bounds].size.width / 2) - 140;
-    //    }
+        if (self.toolInfo.availalbeSubtoolCount < 4) {
+            x = ([[UIScreen mainScreen] bounds].size.width / 2) - 140;
+        }
     CGFloat H = _menuView.height;
 
     for (CLImageToolInfo *info in self.toolInfo.sortedSubtools) {

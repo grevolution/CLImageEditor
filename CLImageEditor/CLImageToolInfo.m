@@ -40,6 +40,16 @@
     return dict;
 }
 
+- (int)availalbeSubtoolCount {
+    int count = 0;
+    for(CLImageToolInfo *i in _subtools) {
+        if(i.available){
+            count++;
+        }
+    }
+    return count;
+}
+
 - (NSString *)description {
     return [NSString stringWithFormat:@"%@", self.descriptionDictionary];
 }
